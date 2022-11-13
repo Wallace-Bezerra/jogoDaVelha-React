@@ -1,6 +1,7 @@
 import Icon from "../icon/Icon";
 import Subtitle from "../subtitle/Subtitle";
 import Title from "../title/Title";
+import styles from "./Header.module.css"
 
 function Header() {
   const links = [
@@ -19,7 +20,20 @@ function Header() {
     <>
       <Title>Jogo da Velha!</Title>
       <Subtitle>Criado por Wallace Bezerra</Subtitle>
-      <Icon links={links} />
+      <div className={styles.iconContainer}>
+
+        {links.map(({ image, link, size }, index) => {
+          return (
+            <Icon
+              key={`Icon-key:${index}`}
+              iconName={image}
+              link={link}
+              size={size}
+            />
+          )
+        })}
+
+      </div>
     </>
   );
 }
