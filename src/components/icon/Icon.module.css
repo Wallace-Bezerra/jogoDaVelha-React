@@ -1,0 +1,13 @@
+.iconContainer {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.link {
+  transition: all 0.4s;
+}
+.link:hover {
+  transform: scale(1.08);
+}

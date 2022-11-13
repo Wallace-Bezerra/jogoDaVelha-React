@@ -1,10 +1,7 @@
-import GamePage from "../src/components/gamePage/GamePage"
+import GamePage from "../src/components/gamePage/GamePage";
 
-function HomePage () {
-  
-  return (
-      <GamePage/>
-  )
+function HomePage() {
+  return <GamePage />;
 }
 
-export default HomePage
+export default HomePage;
