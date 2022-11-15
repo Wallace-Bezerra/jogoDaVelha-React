@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import GameOption from "../gameOption/GameOption";
 import GameInfo from "../gameInfo/GameInfo";
 import styles from "./Game.module.css";
-import Button from "../button/Button";
 
 function Game() {
   const [gameState, setGameState] = useState(Array(9).fill(0));
@@ -20,79 +19,72 @@ function Game() {
     [1, 4, 7],
     [2, 5, 8],
     [0, 4, 8],
-    [2, 4, 6]
-  ]
+    [2, 4, 6],
+  ];
 
   useEffect(() => {
-    setPlayer(currentPlayer * -1)
+    setPlayer(currentPlayer * -1);
+    verificarWinner();
+    verificarEmpate();
+    exibirResultado();
+  }, [gameState]);
+
+  useEffect(() => {
+    if (winner !== 0) setDraw(false);
     verificarWinner();
     exibirResultado();
-
-  }, [gameState, winner])
+  }, [winner]);
 
   function verificarEmpate() {
-    console.log(winner, gameState)
     const checkDraw = gameState.every((item) => {
       return item !== 0;
-    })
-    if (checkDraw) {
+    });
+    if (checkDraw && winner === 0) {
       setDraw(true);
+      setResult("Empatou!");
     }
   }
 
-
   function handleClick(index) {
-    console.log("winner antes da funcção", winner)
     if (gameState[index] === 0 && winner === 0) {
       let newGameState = [...gameState];
       newGameState[index] = currentPlayer;
       setGameState(newGameState);
-      console.log("global", winner)
     }
   }
 
   function verificarWinner() {
     table.forEach((arrayItem) => {
       let newArray = arrayItem.map((item) => {
-        return gameState[item]
-      })
+        return gameState[item];
+      });
 
       let soma = newArray.reduce((acc, item) => {
         return acc + item;
-      })
-      console.log("soma", soma);
+      });
       if (soma === 3 || soma === -3) {
         let ganhador = soma / 3;
-        setWinner(ganhador)
+        setWinner(ganhador);
         setWinnerLine(arrayItem);
-        console.log("winner", winner);
+        setPlayer(ganhador);
       }
-      else if (winner === 0) {
-        verificarEmpate();
-      }
-    })
+    });
   }
 
   function verifyWinnerLine(index) {
-    return (winnerLine.find((item) => {
-      return item === index;
-    })) !== undefined
+    return (
+      winnerLine.find((item) => {
+        return item === index;
+      }) !== undefined
+    );
   }
 
   function exibirResultado() {
     if (winner === 1) {
-      console.log("Circulo Venceu!");
-      setResult("Circulo Venceu!")
+      setResult("Circulo Venceu!");
+    } else if (winner === -1) {
+      setResult("X venceu!");
     }
-    else if (winner === -1) {
-      console.log("x Venceu!")
-      setResult("X venceu!")
-
-    }
-    else {
-      setResult("Próximo a Jogar");
-    }
-
   }
 
   function resetGame() {
@@ -101,33 +93,30 @@ function Game() {
     setWinner(0);
     setWinnerLine([]);
     setDraw(false);
-    console.log("reset")
+    setPlayer(1);
+    setResult("Próximo a Jogar");
   }
 
   return (
     <div className={styles.gameContainer}>
       <div className={styles.gameBoard}>
-        {
-          gameState.map((item, index) => {
-            return (
-              <GameOption
-                key={`GameOption-key:${index}`}
-                status={item}
-                onClick={() => handleClick(index)}
-                isWinner={verifyWinnerLine(index)}
-                isDraw={draw}
-              />
-            )
-          })
-        }
+        {gameState.map((item, index) => {
+          return (
+            <GameOption
+              key={`GameOption-key:${index}`}
+              status={item}
+              onClick={() => handleClick(index)}
+              isWinner={verifyWinnerLine(index)}
+              isDraw={draw}
+            />
+          );
+        })}
       </div>
       <GameInfo
         result={result}
         currentPlayer={currentPlayer}
         resetGame={resetGame}
       />
-
-
     </div>
   );
 }
