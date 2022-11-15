@@ -1,8 +1,18 @@
 .btn {
     padding: 12px 30px;
-    background-color: rgb(19, 88, 179);
+    background-color: #1358b3;
     color: white;
     border: none;
     border-radius: 7px;
     cursor: pointer;
+    font-size: 18px;
+    transition: all 0.5s;
+}
+
+.btn:hover {
+    background-color: #0c448d;
+}
+.btn:disabled {
+    filter: grayscale();
+    cursor: initial;
 }

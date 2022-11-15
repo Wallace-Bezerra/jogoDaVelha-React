@@ -1,13 +1,11 @@
-import styles from "./Button.module.css"
+import styles from "./Button.module.css";
 
-function Button({ children, onClick }) {
-    return (
-        <button
-            className={styles.btn}
-            onClick={onClick}>
-            {children}
-        </button>
-    )
+function Button({ children, onClick, btnActive }) {
+  return (
+    <button disabled={!btnActive} className={styles.btn} onClick={onClick}>
+      {children}
+    </button>
+  );
 }
 
-export default Button
+export default Button;

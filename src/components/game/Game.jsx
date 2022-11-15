@@ -2,14 +2,20 @@ import { useState, useEffect } from "react";
 import GameOption from "../gameOption/GameOption";
 import GameInfo from "../gameInfo/GameInfo";
 import styles from "./Game.module.css";
+import Score from "../score/Score";
 
 function Game() {
   const [gameState, setGameState] = useState(Array(9).fill(0));
   const [currentPlayer, setPlayer] = useState(1);
   const [winner, setWinner] = useState(0);
   const [result, setResult] = useState("Próximo a Jogar");
+  const [btnActive, setBtnActive] = useState(false);
   const [winnerLine, setWinnerLine] = useState([]);
   const [draw, setDraw] = useState(false);
+  const [score, setScore] = useState({
+    circle: 0,
+    x: 0,
+  });
 
   const table = [
     [0, 1, 2],
@@ -33,6 +39,7 @@ function Game() {
     if (winner !== 0) setDraw(false);
     verificarWinner();
     exibirResultado();
+    updateScore(winner);
   }, [winner]);
 
   function verificarEmpate() {
@@ -42,6 +49,7 @@ function Game() {
     if (checkDraw && winner === 0) {
       setDraw(true);
       setResult("Empatou!");
+      setBtnActive(true);
     }
   }
 
@@ -67,6 +75,7 @@ function Game() {
         setWinner(ganhador);
         setWinnerLine(arrayItem);
         setPlayer(ganhador);
+        setBtnActive(true);
       }
     });
   }
@@ -87,7 +96,40 @@ function Game() {
     }
   }
 
+  function updateScore(ganhador) {
+    //Tentei utilizar apenas um useState()
+    // if (ganhador === 1) {
+    //   const newScore = score["circle"] += 1;
+    //   console.log(newScore);
+    // }
+    if (ganhador === 1) {
+      const newScore = {
+        ...score,
+        circle: score["circle"] + 1,
+      };
+      setScore(newScore);
+    }
+    if (ganhador === -1) {
+      const newScore = {
+        ...score,
+        x: score["x"] + 1,
+      };
+      setScore(newScore);
+    }
+    // if (ganhador === -1) {
+    //   const newScore = score["x"] += 1;
+    //   console.log(newScore);
+    //   console.log(score);
+    // }
+  }
   function resetGame() {
+    playAgain();
+    setScore({
+      circle: 0,
+      x: 0,
+    });
+  }
+  function playAgain() {
     const NewGame = Array(9).fill(0);
     setGameState(NewGame);
     setWinner(0);
@@ -95,29 +137,35 @@ function Game() {
     setDraw(false);
     setPlayer(1);
     setResult("Próximo a Jogar");
+    setBtnActive(false);
   }
 
   return (
-    <div className={styles.gameContainer}>
-      <div className={styles.gameBoard}>
-        {gameState.map((item, index) => {
-          return (
-            <GameOption
-              key={`GameOption-key:${index}`}
-              status={item}
-              onClick={() => handleClick(index)}
-              isWinner={verifyWinnerLine(index)}
-              isDraw={draw}
-            />
-          );
-        })}
+    <>
+      <Score score={score}></Score>
+      <div className={styles.gameContainer}>
+        <div className={styles.gameBoard}>
+          {gameState.map((item, index) => {
+            return (
+              <GameOption
+                key={`GameOption-key:${index}`}
+                status={item}
+                onClick={() => handleClick(index)}
+                isWinner={verifyWinnerLine(index)}
+                isDraw={draw}
+              />
+            );
+          })}
+        </div>
+        <GameInfo
+          result={result}
+          currentPlayer={currentPlayer}
+          resetGame={resetGame}
+          playAgain={playAgain}
+          btnActive={btnActive}
+        />
       </div>
-      <GameInfo
-        result={result}
-        currentPlayer={currentPlayer}
-        resetGame={resetGame}
-      />
-    </div>
+    </>
   );
 }
 

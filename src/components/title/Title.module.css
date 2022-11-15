@@ -1,9 +1,4 @@
 .title {
   font-size: 42px;
-}
-
-@media(max-width:460px) {
-  .title {
-    font-size: 32px;
-  }
+  text-align: center;
 }

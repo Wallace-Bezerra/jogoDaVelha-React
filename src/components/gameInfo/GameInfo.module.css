@@ -6,6 +6,7 @@
 }
 
 .gameInfo p {
-    width: 120px;
+    width: 190px;
+    font-size: 18px;
     text-align: center;
 }

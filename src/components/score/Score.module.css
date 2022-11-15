@@ -1,0 +1,28 @@
+.score {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.score h2 {
+  text-align: center;
+}
+
+.scoreResult {
+  margin-top: 15px;
+  display: flex;
+  gap: 40px;
+  background: #383838;
+  padding: 12px 15px;
+  border-radius: 4px;
+  /* border: 5px solid #2e2d2d; */
+  border: 5px solid #5e5e5e;
+}
+
+.iconResult {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.iconResult span {
+  font-size: 20px;
+}
