@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import Icon from "../icon/Icon";
 import styles from "./GameOption.module.css";
 
@@ -7,9 +8,14 @@ function GameIcon({ iconName }) {
   )
 }
 
-function GameOption({ status, onClick }) {
+function GameOption({ status, onClick, isWinner, isDraw }) {
   return (
-    <div className={styles.block} onClick={onClick}>
+    <div className={classNames(styles.block,
+      {
+        [styles.winner]: isWinner,
+        [styles.draw]: isDraw
+      }
+    )} onClick={onClick}>
 
       {status === 1 && <GameIcon iconName="circle" />}
       {status === -1 && <GameIcon iconName="x" />}

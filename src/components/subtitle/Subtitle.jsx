@@ -1,5 +1,7 @@
+import styles from "./Subtitle.module.css"
+
 function Subtitle({ children }) {
-  return <p style={{ fontSize: "18px" }}>{children}</p>;
+  return <p className={styles.subtitle}>{children}</p>;
 }
 
 export default Subtitle;

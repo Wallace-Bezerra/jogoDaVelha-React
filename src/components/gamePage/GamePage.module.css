@@ -1,10 +1,17 @@
 .game {
-  width: 400px;
-  height: 400px;
+  /* width: 400px;
+  height: 400px; */
   display: flex;
   flex-direction: column;
   gap: 10px;
   justify-content: center;
   align-items: center;
+  padding-inline: 32px;
   /* background-color: aqua; */
+}
+
+@media (max-width:560px) {
+  .game {
+    padding-block: 30px;
+  }
 }
