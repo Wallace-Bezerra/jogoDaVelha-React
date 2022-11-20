@@ -10,3 +10,26 @@
     font-size: 18px;
     text-align: center;
 }
+
+@media (max-width:560px) {
+    .gameInfo {
+        position: absolute;
+        top: 200px;
+        right: 1px;
+        gap: 16px;
+    }
+
+    .gameInfo p {
+        font-size: 16px;
+        width: 160px;
+    }
+
+    .gameInfo img {
+        width: 25px;
+    }
+
+    .gameInfo button {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+}

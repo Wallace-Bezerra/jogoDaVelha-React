@@ -7,3 +7,9 @@
 .link:hover {
   transform: scale(1.08);
 }
+
+@media (max-width:560px) {
+  .link img {
+    width: 35px;
+  }
+}
