@@ -5,9 +5,10 @@
   justify-content: center;
   align-items: center;
   padding-inline: 32px;
+  position: relative;
 }
 
-@media (max-width:560px) {
+@media (max-width: 560px) {
   .game {
     padding-block: 30px;
   }

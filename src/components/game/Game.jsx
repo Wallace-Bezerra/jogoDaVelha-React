@@ -97,7 +97,7 @@ function Game() {
   }
 
   function updateScore(ganhador) {
-    //Tentei utilizar apenas um useState()
+    //Tentei utilizar apenas um useState
     // if (ganhador === 1) {
     //   const newScore = score["circle"] += 1;
     //   console.log(newScore);

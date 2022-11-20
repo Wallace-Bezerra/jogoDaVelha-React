@@ -8,14 +8,16 @@
     margin-top: 40px;
 }
 
-
 .gameBoard {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
 }
 
-@media(max-width:560px) {
+@media (max-width: 560px) {
+    #__next {
+        height: 100vh;
+    }
     .gameContainer {
         flex-direction: column;
         width: initial;
