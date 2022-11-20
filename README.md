@@ -1,4 +1,4 @@
-<h1 align="center"> Busca Cep </h1>
+<h1 align="center"> Jogo da Velha </h1>
 
 <p align="center">
 Esse é um projeto prático utilizando React
